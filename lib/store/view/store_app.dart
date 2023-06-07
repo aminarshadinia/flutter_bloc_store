@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bloc_app_test/store/store.dart';
@@ -43,7 +41,28 @@ class __StoreAppViewState extends State<_StoreAppView> {
     context.read<StoreBloc>().add(StoreProductsRemovedFromCart(cartId));
   }
 
-  void _viewCart() {}
+  void _viewCart() {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SlideTransition(
+            position: Tween(
+              begin: const Offset(0, 1),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        },
+        pageBuilder: (
+          _,
+          __,
+          ___,
+        ) =>
+            const CartScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +190,7 @@ class __StoreAppViewState extends State<_StoreAppView> {
         }),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: _viewCart,
         tooltip: 'View Cart',
         child: const Icon(Icons.shopping_cart),
       ),
