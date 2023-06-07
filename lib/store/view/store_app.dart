@@ -45,13 +45,16 @@ class __StoreAppViewState extends State<_StoreAppView> {
     Navigator.push(
       context,
       PageRouteBuilder(
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        transitionsBuilder: (_, animation, __, child) {
           return SlideTransition(
             position: Tween(
               begin: const Offset(0, 1),
               end: Offset.zero,
             ).animate(animation),
-            child: child,
+            child: BlocProvider.value(
+              value: context.read<StoreBloc>(),
+              child: child,
+            ),
           );
         },
         pageBuilder: (
