@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -192,11 +191,40 @@ class __StoreAppViewState extends State<_StoreAppView> {
               });
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _viewCart,
-        tooltip: 'View Cart',
-        child: const Icon(Icons.shopping_cart),
-      ),
+      floatingActionButton: floatingActionButton(),
+    );
+  }
+
+  Stack floatingActionButton() {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: FloatingActionButton(
+            onPressed: _viewCart,
+            tooltip: 'View Cart',
+            child: const Icon(Icons.shopping_cart),
+          ),
+        ),
+        BlocBuilder<StoreBloc, StoreState>(
+          builder: (context, state) {
+            if (state.cartIds.isEmpty) {
+              return Container();
+            }
+            return Positioned(
+              right: -4,
+              bottom: 40,
+              child: CircleAvatar(
+                backgroundColor: Colors.tealAccent,
+                radius: 12,
+                child: Text('${state.cartIds.length}'),
+              ),
+            );
+          },
+        )
+      ],
     );
   }
 }
