@@ -1,9 +1,11 @@
+import 'package:bloc_app_test/app/app.dart';
 import 'package:bloc_app_test/store/store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'counter/bloc/counter.dart';
 
 void main() {
+  Bloc.observer = AppObserver();
   runApp(const StoreApp());
 }
 
