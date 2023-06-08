@@ -1,4 +1,5 @@
 import 'package:bloc_app_test/store/store.dart';
+import 'package:bloc_app_test/values/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Cart'),
+        title: const Text(Strings.myCart),
       ),
       body: hasEmptyCart
           ? emptyCartContainer(context)
@@ -74,7 +75,7 @@ class CartScreen extends StatelessWidget {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text('Remove from cart'),
+                                  Text(Strings.removeFromCart),
                                 ],
                               ),
                             )),
@@ -91,13 +92,13 @@ class CartScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Your cart is empty'),
+          const Text(Strings.yourCartIsEmpty),
           const SizedBox(
             height: 10,
           ),
           OutlinedButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Add product'),
+            child: const Text(Strings.addProduct),
           ),
         ],
       ),
